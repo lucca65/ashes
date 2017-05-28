@@ -42,13 +42,13 @@ defmodule Coherence.Redirects do
 
   """
   use Redirects
-  # Uncomment the import below if adding overrides
-  # import Ashes.Web.Router.Helpers
+  import Ashes.Web.Router.Helpers
 
-  # Add function overrides below
+  # After login redirect
+  def session_create(conn, _) do
+    redirect(conn, to: admin_home_path(conn, :index))
+  end
 
-  # Example usage
-  # Uncomment the following line to return the user to the login form after logging out
-  # def session_delete(conn, _), do: redirect(conn, to: session_path(conn, :new))
-
+  # Return the user to the login form after logging out
+  def session_delete(conn, _), do: redirect(conn, to: session_path(conn, :new))
 end

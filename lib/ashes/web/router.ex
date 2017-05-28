@@ -21,7 +21,8 @@ defmodule Ashes.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session, session: true
+    plug Coherence.Authentication.Session, protected: true
+    plug :put_layout, {Coherence.LayoutView, :app}
   end
 
   # Keep this empty
@@ -44,5 +45,6 @@ defmodule Ashes.Web.Router do
   # Protected Routes
   scope "/", Ashes.Web do
     pipe_through :protected
+    get "/admin", Base.AdminHomeController, :index
   end
 end
