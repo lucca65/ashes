@@ -26,11 +26,14 @@ defmodule Ashes.Mixfile do
      {:phoenix_ecto, "~> 3.2"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:rename, "~> 0.1.0"},
      {:coherence, github: "smpallen99/coherence", branch: "phx-1.3"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+
+     {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:credo, "~> 0.", only: [:dev, :test], runtime: false}
+    ]
   end
 
   defp aliases do
