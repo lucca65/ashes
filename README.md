@@ -1,4 +1,6 @@
 # Ashes
+[![Ebert](https://ebertapp.io/github/lucca65/ashes.svg)](https://ebertapp.io/github/lucca65/ashes)
+<hr/>
 
 To start your Phoenix server:
 
