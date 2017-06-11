@@ -32,7 +32,7 @@ defmodule Ashes.Mixfile do
      {:cowboy, "~> 1.0"},
 
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:credo, "~> 0.", only: [:dev, :test], runtime: false}
+     {:credo, "~> 0.3", only: [:dev, :test], runtime: false}
     ]
   end
 

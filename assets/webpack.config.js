@@ -25,7 +25,7 @@ module.exports = (env) => {
     output: {
       path: path.resolve(__dirname, '../priv/static'),
       filename: 'js/[name].js',
-      publicPath: 'http://localhost:8080/'
+      publicPath: 'http://localhost:8081/'
     },
 
     module: {
