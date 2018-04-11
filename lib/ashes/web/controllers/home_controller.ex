@@ -1,4 +1,4 @@
-defmodule Ashes.Web.Base.AdminHomeController do
+defmodule Ashes.Web.HomeController do
   use Ashes.Web, :controller
 
   def index(conn, _params) do

@@ -19,12 +19,7 @@ defmodule Ashes.Web.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(%{token: token}, socket) do
-    case Coherence.verify_user_token(socket, token, &assign/3) do
-      {:error, _} -> :error
-      {:ok, socket} -> {:ok, socket}
-    end
-  end
+  def connect(%{token: _token}, _socket), do: nil
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #

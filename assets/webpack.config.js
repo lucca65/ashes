@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-
 /*
  * Configuration
  **/
@@ -18,13 +17,13 @@ module.exports = (env) => {
 
     entry: {
       app: [
-        'js/app.js'
+        'app/main.js'
       ]
     },
 
     output: {
       path: path.resolve(__dirname, '../priv/static'),
-      filename: 'js/[name].js',
+      filename: 'app/[name].js',
       publicPath: 'http://localhost:8081/'
     },
 
@@ -51,6 +50,7 @@ module.exports = (env) => {
               query: {
                 progressive: true,
                 optimizationLevel: 7,
+
                 interlaced: false,
                 pngquant: {
                   quality: '65-90',
@@ -77,6 +77,19 @@ module.exports = (env) => {
           ] : ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: ['css-loader']
+          })
+        },
+
+        {
+          test: /\.(scss|sass)$/,
+          exclude: /node_modules/,
+          use: isDev ? [
+            { loader: "style-loader" },
+            { loader: "css-loader" },
+            { loader: "sass-loader" }
+          ] : ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['sass-loader']
           })
         }
       ]

@@ -1,6 +1,5 @@
 defmodule Ashes.Web.Router do
   use Ashes.Web, :router
-  use Coherence.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,7 +7,6 @@ defmodule Ashes.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session
   end
 
   pipeline :api do
@@ -21,30 +19,28 @@ defmodule Ashes.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session, protected: true
-    plug :put_layout, {Coherence.LayoutView, :app}
+  end
+
+  pipeline :admin_layout do
+    plug(:put_layout, {Ashes.LayoutView, :admin})
   end
 
   # Keep this empty
   scope "/" do
     pipe_through :browser
-    coherence_routes()
-  end
-
-  scope "/admin" do
-    pipe_through :protected
-    coherence_routes :protected
   end
 
   # Public Routes
   scope "/", Ashes.Web do
     pipe_through :browser # Use the default browser stack
-    get "/", PageController, :index
+
+    get("/", HomeController, :index)
   end
 
   # Protected Routes
-  scope "/", Ashes.Web do
-    pipe_through :protected
-    get "/admin", Base.AdminHomeController, :index
+  scope "/admin", Ashes.Web do
+    pipe_through([:browser, :protected, :admin_layout])
+
+    get "/", Admin.HomeController, :index
   end
 end
