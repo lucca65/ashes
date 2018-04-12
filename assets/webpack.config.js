@@ -1,3 +1,4 @@
+const exec = require('child_process').exec
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -30,7 +31,9 @@ module.exports = (env) => {
       extensions: ['.js', '.json', '.css', '.json', '.vue'],
       alias: {
         '@': path.resolve(__dirname, 'src/'),
-        'vue$': 'vue/dist/vue.esm.js'
+        'vue$': 'vue/dist/vue.esm.js',
+        'semantic-js': path.resolve(__dirname, 'node_modules/semantic-ui-css/semantic.min.js'),
+        'semantic-css': path.resolve(__dirname, 'node_modules/semantic-ui-css/semantic.min.css')
       }
     },
 
@@ -48,15 +51,20 @@ module.exports = (env) => {
           loader: 'vue-loader'
         },
         {
+          test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+          use: {
+            loader: 'url-loader',
+            options: { limit: 100000 }
+          }
+        },
+        {
           test: /\.css$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: true }
-            },
-          ]
-        }
+          include: /node_modules/,
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: [{ loader: 'css-loader'}]
+          })
+        },
 
         // {
         //   test: /\.(gif|png|jpe?g|svg)$/i,
@@ -78,15 +86,7 @@ module.exports = (env) => {
         //     }
         //   ]
         // },
-
         // {
-        //   test: /\.(ttf|woff2?|eot|svg)$/,
-        //   exclude: /node_modules/,
-        //   query: { name: 'fonts/[hash].[ext]' },
-        //   loader: 'file-loader'
-        // },
-
- ,       // {
         //   test: /\.(scss|sass)$/,
         //   exclude: /node_modules/,
         //   use: isDev ? [
@@ -110,7 +110,19 @@ module.exports = (env) => {
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         comments: false
-      })
+      }),
+
+      // open vue-devtools
+      {
+        apply: (compiler) => {
+          compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+            exec('./node_modules/.bin/vue-devtools', (err, stdout, stderr) => {
+              if (stdout) process.stdout.write(stdout);
+              if (stderr) process.stderr.write(stderr);
+            });
+          });
+        }
+      }
     ]
   }
 }

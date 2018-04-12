@@ -16,7 +16,6 @@ config :ashes, AshesWeb.Endpoint,
       "node_modules/.bin/webpack",
       "--colors",
       "--hot",
-      "--stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
