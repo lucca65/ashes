@@ -13,9 +13,14 @@ config :ashes, AshesWeb.Endpoint,
   check_origin: false,
   watchers: [
     node: [
-      "node_modules/.bin/webpack",
-      "--colors",
+      "node_modules/.bin/webpack-dev-server",
+      "--inline",
       "--hot",
+      "--stdin",
+      "--host", "localhost",
+      "--port", "8080",
+      "--public", "localhost:8080",
+      "--config", "build/webpack.base.conf.js",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
