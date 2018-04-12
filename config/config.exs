@@ -10,17 +10,17 @@ config :ashes,
   ecto_repos: [Ashes.Repo]
 
 # Configures the endpoint
-config :ashes, Ashes.Web.Endpoint,
+config :ashes, AshesWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "2X+LzRDSffF+9ZdHchnU+7Dg4zssxdBpd2t2SFrfLJUMY+DYnTDi3NqemQo/mAGf",
-  render_errors: [view: Ashes.Web.ErrorView, accepts: ~w(html json)],
+  secret_key_base: "M6i2ZwLhbMWe8YIFOb1zfoG0vsMhGGPwnwR038++06P2iN2IQaY1nXHzUyhJxzNc",
+  render_errors: [view: AshesWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Ashes.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:user_id]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

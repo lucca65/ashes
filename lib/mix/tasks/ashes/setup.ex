@@ -1,5 +1,20 @@
 defmodule Mix.Tasks.Ashes.Setup do
-  @moduledoc false
+  @moduledoc """
+  Mix Task Reponsible to Setup this base project as a new reincarnation
+
+  This will:
+
+  - Rename the whole OTP app
+  - Rename dependency
+  - Redefine prod.secret configuration
+  - Reset git commits, so no history exists
+  - Install NPM packages
+  - Remove this Mix task
+
+  ```shell
+  $ mix ashes.setup AppName otp_name
+  ```
+  """
 
   use Mix.Task
 

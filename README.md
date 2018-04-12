@@ -1,18 +1,14 @@
 # Ashes
-[![Ebert](https://ebertapp.io/github/lucca65/ashes.svg)](https://ebertapp.io/github/lucca65/ashes)
-<hr/>
 
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate && mix ecto.setup`
+  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Making it your own
 
 ## Learn more
 

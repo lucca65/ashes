@@ -1,4 +1,4 @@
-defmodule Ashes.Web.ConnCase do
+defmodule AshesWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule Ashes.Web.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import Ashes.Web.Router.Helpers
+      import AshesWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Ashes.Web.Endpoint
+      @endpoint AshesWeb.Endpoint
     end
   end
 

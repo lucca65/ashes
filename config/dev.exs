@@ -6,15 +6,20 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :ashes, Ashes.Web.Endpoint,
+config :ashes, AshesWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: ["node_modules/.bin/webpack-dev-server", "--inline", "--colors", "--hot", "--stdin", "--host", "localhost", "--port", "8081", "--public", "localhost:8080",
-           cd: Path.expand("../assets", __DIR__),
-          ]]
+    node: [
+      "node_modules/.bin/webpack",
+      "--colors",
+      "--hot",
+      "--stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # ## SSL Support
 #
@@ -33,13 +38,13 @@ config :ashes, Ashes.Web.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :ashes, Ashes.Web.Endpoint,
+config :ashes, AshesWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/ashes/web/views/.*(ex)$},
-      ~r{lib/ashes/web/templates/.*(eex)$}
+      ~r{lib/ashes_web/views/.*(ex)$},
+      ~r{lib/ashes_web/templates/.*(eex)$}
     ]
   ]
 

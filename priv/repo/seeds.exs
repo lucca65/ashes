@@ -9,8 +9,3 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-Ashes.Repo.delete_all(Ashes.AdminUser)
-
-Ashes.AdminUser.changeset(%Ashes.AdminUser{}, %{name: "Admin", email: "admin@example.com", password: "password", password_confirmation: "password"})
-|> Ashes.Repo.insert!
-

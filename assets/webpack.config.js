@@ -1,7 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 /*
  * Configuration
@@ -11,122 +14,102 @@ module.exports = (env) => {
   const devtool = isDev ? 'eval' : 'source-map'
 
   return {
+    mode: isDev ? 'development' : 'production',
     devtool: devtool,
-
     context: __dirname,
-
     entry: {
-      app: [
-        'app/main.js'
-      ]
+      app: 'src/main.js'
     },
-
     output: {
       path: path.resolve(__dirname, '../priv/static'),
-      filename: 'app/[name].js',
+      filename: 'js/[name].js',
       publicPath: 'http://localhost:8081/'
+    },
+    resolve: {
+      modules: ['node_modules', __dirname],
+      extensions: ['.js', '.json', '.css', '.json', '.vue'],
+      alias: {
+        '@': path.resolve(__dirname, 'src/'),
+        'vue$': 'vue/dist/vue.esm.js'
+      }
     },
 
     module: {
       rules: [
         {
-          test: /\.(jsx?)$/,
+          test: /\.js$/,
+          include: ['/src'],
           exclude: /node_modules/,
           loader: 'babel-loader',
-          options: {
-            presets: [
-              ['es2015', {modules: false}]
-            ]
-          }
+          options: { presets: ['@babel/preset-env'] }
         },
-
         {
-          test: /\.(gif|png|jpe?g|svg)$/i,
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
+        {
+          test: /\.css$/,
           exclude: /node_modules/,
-          loaders: [
-            'file-loader',
+          use: [
             {
-              loader: 'image-webpack-loader',
-              query: {
-                progressive: true,
-                optimizationLevel: 7,
-
-                interlaced: false,
-                pngquant: {
-                  quality: '65-90',
-                  speed: 4
-                }
-              }
-            }
+              loader: 'css-loader',
+              options: { minimize: true }
+            },
           ]
-        },
-
-        {
-          test: /\.(ttf|woff2?|eot|svg)$/,
-          exclude: /node_modules/,
-          query: { name: 'fonts/[hash].[ext]' },
-          loader: 'file-loader'
-        },
-
-        {
-          test: /\.(css)$/,
-          exclude: /node_modules/,
-          use: isDev ? [
-            'style-loader',
-            'css-loader'
-          ] : ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: ['css-loader']
-          })
-        },
-
-        {
-          test: /\.(scss|sass)$/,
-          exclude: /node_modules/,
-          use: isDev ? [
-            { loader: "style-loader" },
-            { loader: "css-loader" },
-            { loader: "sass-loader" }
-          ] : ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: ['sass-loader']
-          })
         }
+
+        // {
+        //   test: /\.(gif|png|jpe?g|svg)$/i,
+        //   exclude: /node_modules/,
+        //   loaders: [
+        //     'file-loader',
+        //     {
+        //       loader: 'image-webpack-loader',
+        //       query: {
+        //         progressive: true,
+        //         optimizationLevel: 7,
+
+        //         interlaced: false,
+        //         pngquant: {
+        //           quality: '65-90',
+        //           speed: 4
+        //         }
+        //       }
+        //     }
+        //   ]
+        // },
+
+        // {
+        //   test: /\.(ttf|woff2?|eot|svg)$/,
+        //   exclude: /node_modules/,
+        //   query: { name: 'fonts/[hash].[ext]' },
+        //   loader: 'file-loader'
+        // },
+
+ ,       // {
+        //   test: /\.(scss|sass)$/,
+        //   exclude: /node_modules/,
+        //   use: isDev ? [
+        //     { loader: "style-loader" },
+        //     { loader: "css-loader" },
+        //     { loader: "sass-loader" }
+        //   ] : ExtractTextPlugin.extract({
+        //     fallback: 'style-loader',
+        //     use: ['sass-loader']
+        //   })
+        // }
       ]
     },
 
-    resolve: {
-      modules: ['node_modules', __dirname],
-      extensions: ['.js', '.json', '.jsx', '.css', '.styl']
-    },
-
-    plugins: isDev ? [
-      new CopyWebpackPlugin([{
-        from: 'static'
-      }])
-    ] : [
-      new CopyWebpackPlugin([{
-        from: 'static'
-      }]),
-
+    plugins: [
       new ExtractTextPlugin({
         filename: 'css/[name].css',
         allChunks: true
       }),
 
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        beautify: false,
-        comments: false,
-        extractComments: false,
-        compress: {
-          warnings: false,
-          drop_console: true
-        },
-        mangle: {
-          except: ['$'],
-          keep_fnames: true
-        }
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        comments: false
       })
     ]
   }
