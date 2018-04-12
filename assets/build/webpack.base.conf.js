@@ -25,8 +25,8 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, '../priv/static'),
-    filename: 'js/app.js',
+    path: path.resolve(__dirname, '../../priv/static'),
+    filename: 'js/[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath

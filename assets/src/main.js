@@ -13,5 +13,3 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-
-alert('from webpack')

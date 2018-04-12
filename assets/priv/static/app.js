@@ -11746,7 +11746,6 @@ module.exports = function normalizeComponent (
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'HelloWorld',
@@ -11782,6 +11781,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   components: { App: __WEBPACK_IMPORTED_MODULE_1__App__["a" /* default */] },
   template: '<App/>'
 });
+
+alert('from webpack');
 
 /***/ }),
 /* 8 */
@@ -14745,28 +14746,7 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _c("h2", [_vm._v(_vm._s(_vm.custom))]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.custom,
-          expression: "custom"
-        }
-      ],
-      attrs: { name: "", type: "text", value: "" },
-      domProps: { value: _vm.custom },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.custom = $event.target.value
-        }
-      }
-    })
+    _c("h2", [_vm._v(_vm._s(_vm.custom))])
   ])
 }
 var staticRenderFns = [

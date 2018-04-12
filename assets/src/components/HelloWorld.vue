@@ -81,6 +81,7 @@
     </li>
   </ul>
   <h2>{{custom}}</h2>
+  <input name="" type="text" value="" v-model="custom"/>
 </div>
 </template>
 
