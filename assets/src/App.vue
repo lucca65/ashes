@@ -1,18 +1,23 @@
 <template>
-  <div class="ui container">
-    <h1 class="ui header">Titulo: {{title}}</h1>
-    <div class="ui primary button">title</div>
-    <input v-model="title" type="text" />
-  </div>
+<div id="app">
+  <img src="./assets/logo.png">
+  <router-view/>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'app',
-  data() {
-    return {
-    title: 'From vue!'
-    }
-  }
+  name: 'App'
 }
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
