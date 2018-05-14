@@ -14,8 +14,9 @@ config :ashes, AshesWeb.Endpoint,
   watchers: [
     node: [
       "node_modules/.bin/webpack",
-      "--colors",
-      "--hot",
+      "--color",
+      "--watch",
+      "--config", "build/webpack.base.conf.js",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
