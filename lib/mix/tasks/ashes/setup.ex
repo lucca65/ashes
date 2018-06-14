@@ -24,7 +24,7 @@ defmodule Mix.Tasks.Ashes.Setup do
     create_prod_secret_config(name, otp)
     git_init()
     node_init()
-    remove_mix_task()
+    remove_mix_task(name)
     print_conclusion_message()
   end
 
@@ -106,9 +106,9 @@ defmodule Mix.Tasks.Ashes.Setup do
     File.cd!("..")
   end
 
-  defp remove_mix_task do
+  defp remove_mix_task(app_name) do
     Mix.Shell.IO.info("Removing this mix task (you shouldn't need it anymore)")
-    Mix.Shell.IO.cmd("rm -rf lib/mix/tasks/app")
+    Mix.Shell.IO.cmd("rm -rf lib/mix/tasks/#{app_name}")
   end
 
   defp print_conclusion_message do

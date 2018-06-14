@@ -1,7 +1,7 @@
 {
   "name": "ashes",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Frontend",
   "author": "Lucca <julienlucca@gmail.com>",
   "private": true,
   "scripts": {
